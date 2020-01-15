@@ -18,12 +18,4 @@ public class OrderMapper {
                 .build();
     }
 
-    public Orders mapOrderDtoToOrder(OrderDTO orderDTO) {
-
-        return Orders.builder().delivery(orderDTO.getDeliveryAddress())
-                .createdAt(orderDTO.getOrderTimestamp())
-                .orderDetail(orderDetailMapper.mapOrderDetailListDtoToOrderDetailList(orderDTO.getProductsList()))
-                .build();
-    }
-
 }
