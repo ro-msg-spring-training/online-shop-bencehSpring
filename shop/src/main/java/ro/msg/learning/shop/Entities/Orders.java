@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Builder
@@ -29,7 +30,7 @@ public class Orders {
     @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
     private Adresa delivery;
 
-    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
-    private OrderDetail orderDetail;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderDetail> orderDetail;
 
 }

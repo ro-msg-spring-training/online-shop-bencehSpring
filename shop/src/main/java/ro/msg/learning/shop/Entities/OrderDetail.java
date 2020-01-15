@@ -3,7 +3,6 @@ package ro.msg.learning.shop.Entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Builder
@@ -20,9 +19,8 @@ public class OrderDetail {
 
     private Integer quantity;
 
-    @OneToMany(mappedBy = "orderDetail",cascade = CascadeType.ALL)
-    private List<Product> products;
+    private Integer productId;
 
-    @OneToOne
-    private Orders orders;
+    @ManyToOne
+    private Orders order;
 }

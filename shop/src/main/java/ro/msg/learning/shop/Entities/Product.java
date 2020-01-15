@@ -30,6 +30,4 @@ public class Product {
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Stock> stocks;
 
-    @ManyToOne
-    private OrderDetail orderDetail;
 }
