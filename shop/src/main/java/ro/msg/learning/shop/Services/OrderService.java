@@ -38,11 +38,14 @@ public class OrderService {
     }
 
     public OrderDTO createOrder(AddressDTO addressDTO, List<OrderDetailDTO> productsList) {
+
+
         Address address = Address.builder()
                 .country(addressDTO.getAddressCountry())
                 .city(addressDTO.getAddressCity())
                 .street(addressDTO.getAddressStreet())
                 .build();
+
 
         Location location = Location.builder()
                 .name("Mama")
@@ -56,7 +59,8 @@ public class OrderService {
                 .build();
 
         order.getOrderDetail().forEach(orderDetail -> orderDetail.setOrder(order));
-        
+
+
         orderRepository.save(order);
 
         return orderMapper.mapOrderToOrderDTO(order);

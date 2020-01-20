@@ -26,7 +26,7 @@ public class Location {
     @OneToMany(mappedBy = "shippedFrom",cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    @OneToOne(mappedBy = "location",cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)

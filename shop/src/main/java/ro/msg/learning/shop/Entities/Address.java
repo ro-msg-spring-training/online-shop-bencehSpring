@@ -23,9 +23,9 @@ public class Address {
     private String city;
     private String street;
 
-    @OneToOne(cascade = CascadeType.ALL)
-     private Order order;
-
-    @OneToOne
-    private Location location;
+//    @OneToOne(cascade = CascadeType.ALL)
+//     private Order order;
+//
+//    @OneToOne
+//    private Location location;
 }
