@@ -1,7 +1,6 @@
 package ro.msg.learning.shop.DTO;
 
 import lombok.*;
-import ro.msg.learning.shop.Entities.Adresa;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,6 +15,7 @@ import java.util.List;
 public class OrderDTO implements Serializable {
 
      private LocalDateTime orderTimestamp;
-     private Adresa deliveryAddress;
+
+     private AddressDTO deliveryLocation;
      private List<OrderDetailDTO> productsList;
 }

@@ -24,10 +24,10 @@ public class Location {
     private List<Stock> stocks;
 
     @OneToMany(mappedBy = "shippedFrom",cascade = CascadeType.ALL)
-    private List<Orders> orders;
+    private List<Order> orders;
 
     @OneToOne(mappedBy = "location",cascade = CascadeType.ALL)
-    private Adresa adresa;
+    private Address address;
 
     @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)
     private List<Revenue> revenues;

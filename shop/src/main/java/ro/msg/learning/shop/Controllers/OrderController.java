@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.DTO.OrderDTO;
 import ro.msg.learning.shop.Services.OrderService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/orders")
@@ -18,7 +20,7 @@ public class OrderController {
     public OrderDTO newOrder(@RequestBody OrderDTO orderDTO) {
 
         return orderService
-                .createOrder(orderDTO.getOrderTimestamp(), orderDTO.getDeliveryAddress(), orderDTO.getProductsList());
+                .createOrder(orderDTO.getDeliveryLocation(), orderDTO.getProductsList());
     }
 
     @GetMapping("/{id}")
@@ -26,5 +28,11 @@ public class OrderController {
     public OrderDTO oneOrder(@PathVariable Integer id) {
 
         return orderService.getOrderById(id);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<OrderDTO> getOrders() {
+        return orderService.getOrders();
     }
 }

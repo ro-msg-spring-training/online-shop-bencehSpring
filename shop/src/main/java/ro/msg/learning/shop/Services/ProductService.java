@@ -23,23 +23,6 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final ProductCategoryRepository productCategoryRepository;
 
-    public ProductCategory testCategoryExistence(String categoryName, String categoryDescription) {
-        Optional<ProductCategory> productCategory = productCategoryRepository.findByName(categoryName);
-
-        ProductCategory prod = null;
-
-        if (productCategory.isPresent()) {
-            prod = productCategory.get();
-        } else {
-            prod = new ProductCategory();
-            prod.setName(categoryName);
-            prod.setDescription(categoryDescription);
-            productCategoryRepository.save(prod);
-        }
-
-        return prod;
-    }
-
     public ProductDTO createProduct(String name, BigDecimal price, Double weight, String description, String image, String categoryName, String categoryDescription) {
 
         Product product = Product.builder().name(name)
@@ -65,7 +48,7 @@ public class ProductService {
             existingProduct.setWeight(weight);
             existingProduct.setDescription(description);
             existingProduct.setImage(image);
-            existingProduct.setProductCategory(this.testCategoryExistence(categoryName,categoryDescription));
+            existingProduct.setProductCategory(this.testCategoryExistence(categoryName, categoryDescription));
 
             Product updatedProduct = productRepository.save(existingProduct);
 
@@ -93,5 +76,22 @@ public class ProductService {
             productList.add(productMapper.mapProductToProductDto(p));
         }
         return productList;
+    }
+
+    public ProductCategory testCategoryExistence(String categoryName, String categoryDescription) {
+        Optional<ProductCategory> productCategory = productCategoryRepository.findByName(categoryName);
+
+        ProductCategory prod = null;
+
+        if (productCategory.isPresent()) {
+            prod = productCategory.get();
+        } else {
+            prod = new ProductCategory();
+            prod.setName(categoryName);
+            prod.setDescription(categoryDescription);
+            productCategoryRepository.save(prod);
+        }
+
+        return prod;
     }
 }

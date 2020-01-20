@@ -28,7 +28,7 @@ public class User
     private Roles role;
 
     @OneToMany(mappedBy = "user")
-    private List<Orders> orders;
+    private List<Order> orders;
 
     public User (String fistName)
     {

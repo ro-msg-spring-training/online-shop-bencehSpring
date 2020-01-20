@@ -13,7 +13,8 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-public class Orders {
+@Table(name = "order_")
+public class Order {
 
     @Id
     @GeneratedValue
@@ -27,8 +28,8 @@ public class Orders {
 
     private LocalDateTime createdAt;
 
-    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
-    private Adresa delivery;
+    @OneToOne( cascade = CascadeType.ALL)
+    private Location deliveryLocation;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetail;
