@@ -3,7 +3,6 @@ package ro.msg.learning.shop.Services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.DTO.AddressDTO;
-import ro.msg.learning.shop.DTO.LocationDTO;
 import ro.msg.learning.shop.DTO.OrderDTO;
 import ro.msg.learning.shop.DTO.OrderDetailDTO;
 import ro.msg.learning.shop.Entities.Address;

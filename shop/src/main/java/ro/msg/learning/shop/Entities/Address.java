@@ -1,7 +1,6 @@
 package ro.msg.learning.shop.Entities;
 
 import lombok.*;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 
@@ -22,10 +21,4 @@ public class Address {
     private String country;
     private String city;
     private String street;
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//     private Order order;
-//
-//    @OneToOne
-//    private Location location;
 }
