@@ -16,13 +16,14 @@ import java.util.List;
 public class ProductCategory {
 
     @Id
-    @GeneratedValue
+    @TableGenerator(name = "mySeqGen", initialValue = 50, allocationSize = 100)
+    @GeneratedValue(generator = "mySeqGen")
     private Integer productCategoryId;
 
     private String name;
     private String description;
 
-    @OneToMany(mappedBy ="productCategory",cascade = CascadeType.ALL)
-    private List <Product> products;
+    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL)
+    private List<Product> products;
 
 }

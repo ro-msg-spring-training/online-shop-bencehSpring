@@ -14,8 +14,9 @@ import java.util.List;
 @Builder
 public class Product {
 
-    @GeneratedValue
     @Id
+    @TableGenerator(name = "mySeqGen", initialValue = 50, allocationSize = 100)
+    @GeneratedValue(generator = "mySeqGen")
     private Integer productId;
     private BigDecimal price;
     private Double weight;

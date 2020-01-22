@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "strategy",
+      "type": "ro.msg.learning.shop.Configuration.StrategyEnum",
+      "description": "Description for strategy."
+  }
+] }

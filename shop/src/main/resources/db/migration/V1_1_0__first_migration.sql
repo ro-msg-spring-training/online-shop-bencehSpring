@@ -40,3 +40,4 @@ alter table revenue add constraint FK6xukepd8ssa1ok6iakkhp83p7 foreign key (loca
 alter table stock add constraint FK6t3m0kaf6fubuus331gf7xmn8 foreign key (location_id) references location (id);
 alter table stock add constraint FKrwdkwjf037066qtbpq0pg0h6n foreign key (product_product_id) references product (product_id);
 alter table user add constraint FK4keqlw3ucfmfsbeu8r1ijdppf foreign key (role_role_id) references roles (role_id);
+

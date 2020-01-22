@@ -1,0 +1,10 @@
+insert into category (product_category_id, description, name) values (1, 'Replacement of L Pulm Vein with Synth Sub, Open Approach', 'Cookley');
+insert into category (product_category_id, description, name) values (2, 'Drainage of Right Upper Extremity, Perc Endo Approach', 'Domainer');
+insert into category (product_category_id, description, name) values (3, 'Dilation of L Temporal Art with 3 Drug-elut, Perc Approach', 'Opela');
+insert into category (product_category_id, description, name) values (4, 'Removal of Drainage Device from L Up Extrem, Extern Approach', 'Alpha');
+insert into category (product_category_id, description, name) values (5, 'Restriction of Small Intestine with Intralum Dev, Endo', 'Y-find');
+insert into category (product_category_id, description, name) values (6, 'Insertion of Ext Fix into R Metacarpocarp Jt, Open Approach', 'Lotlux');
+insert into category (product_category_id, description, name) values (7, 'Stereotactic Particulate Radiosurgery of Rectum', 'Latlux');
+insert into category (product_category_id, description, name) values (8, 'Control Bleeding in Face, Percutaneous Approach', 'Vagram');
+insert into category (product_category_id, description, name) values (9, 'Extirpation of Matter from Dura Mater, Perc Endo Approach', 'Voltsillam');
+insert into category (product_category_id, description, name) values (10, 'Revision of Infusion Device in Stomach, External Approach', 'Overhold');
