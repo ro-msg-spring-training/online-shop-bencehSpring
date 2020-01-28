@@ -14,7 +14,8 @@ import javax.persistence.*;
 public class Stock {
 
     @Id
-    @GeneratedValue
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Integer quantity;

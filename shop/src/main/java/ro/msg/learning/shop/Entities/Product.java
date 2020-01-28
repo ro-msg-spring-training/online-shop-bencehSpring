@@ -15,8 +15,8 @@ import java.util.List;
 public class Product {
 
     @Id
-    @TableGenerator(name = "mySeqGen", initialValue = 50, allocationSize = 100)
-    @GeneratedValue(generator = "mySeqGen")
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
     private BigDecimal price;
     private Double weight;

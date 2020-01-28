@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String country;

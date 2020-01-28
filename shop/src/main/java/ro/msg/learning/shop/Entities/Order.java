@@ -34,19 +34,4 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetail;
 
-//    @Configuration
-//    public class DeliveryStrategyConfiguration {
-//
-//        @Bean
-//        public interface DeliveryStrategyInterface getDeliveryStrategy() {
-//            StrategyEnum strategyValue = StrategyEnum.fromString(getFromProperties('strategyType'));
-//
-//            if (strategyValue == StrategyEnum.SINGLE_LOCATION) {
-//                return new SingleLocationStrategy(); //care implementeaza deliverystrategyinterface si are metoda doAlgorithm
-//            } else {
-//                return new MostAbundantStrategy(); //care si ea implementeaza deliverystrategyinterface si are metoda doAlgoritm
-//            }
-//        }
-//    }
-
 }

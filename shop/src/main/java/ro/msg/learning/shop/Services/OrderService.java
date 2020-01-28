@@ -6,6 +6,7 @@ import ro.msg.learning.shop.Configuration.DeliveryStrategyInterface;
 import ro.msg.learning.shop.DTO.AddressDTO;
 import ro.msg.learning.shop.DTO.OrderDTO;
 import ro.msg.learning.shop.DTO.OrderDetailDTO;
+import ro.msg.learning.shop.DTO.StockDTO;
 import ro.msg.learning.shop.Entities.Address;
 import ro.msg.learning.shop.Entities.Location;
 import ro.msg.learning.shop.Entities.Order;
@@ -31,6 +32,7 @@ public class OrderService {
     private final AddressRepository addressRepository;
     private final LocationRepository locationRepository;
     private final DeliveryStrategyInterface deliveryStrategyInterface;
+    private final StockService stockService;
 
     public OrderDTO getOrderById(Integer id) throws OrderNotFoundException {
         Optional<Order> orderOptional = orderRepository.findById(id);
@@ -42,7 +44,7 @@ public class OrderService {
 
     public OrderDTO createOrder(AddressDTO addressDTO, List<OrderDetailDTO> productsList) {
 
-        deliveryStrategyInterface.doAlgorithm();
+        List<StockDTO> orderedProducts = deliveryStrategyInterface.doAlgorithm(productsList);
 
         Order order = Order.builder()
                 .deliveryLocation(this.testLocationExistence("ADRESA LUI ", addressDTO))
@@ -53,7 +55,10 @@ public class OrderService {
         order.getOrderDetail().forEach(orderDetail -> orderDetail.setOrder(order));
 
         orderRepository.save(order);
-
+        orderedProducts.forEach(
+                orderedProduct ->
+                        stockService.updateStock(orderedProduct.getProductID(), orderedProduct.getLocationID(), orderedProduct.getQuantity())
+        );
         return orderMapper.mapOrderToOrderDTO(order);
     }
 

@@ -16,14 +16,15 @@ import java.util.List;
 public class ProductCategory {
 
     @Id
-    @TableGenerator(name = "mySeqGen", initialValue = 50, allocationSize = 100)
-    @GeneratedValue(generator = "mySeqGen")
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productCategoryId;
 
     private String name;
     private String description;
 
     @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Product> products;
 
 }

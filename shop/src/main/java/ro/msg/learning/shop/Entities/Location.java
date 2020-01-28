@@ -15,12 +15,14 @@ import java.util.List;
 public class Location {
 
     @Id
-    @GeneratedValue
+    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
 
     @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Stock> stocks;
 
     @OneToMany(mappedBy = "shippedFrom",cascade = CascadeType.ALL)
