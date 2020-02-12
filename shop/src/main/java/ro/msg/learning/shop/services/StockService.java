@@ -11,6 +11,9 @@ import ro.msg.learning.shop.repositories.LocationRepository;
 import ro.msg.learning.shop.repositories.ProductRepository;
 import ro.msg.learning.shop.repositories.StockRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class StockService {
@@ -21,18 +24,27 @@ public class StockService {
     private final StockMapper stockMapper;
 
     public StockDTO createStock(StockDTO stockDTO) {
-        if (productRepository.findProductByProductId(stockDTO.getProductID()) != null) {
-            Stock stock = Stock.builder()
-                    .location(locationRepository.findLocationById(stockDTO.getLocationID()))
-                    .quantity(stockDTO.getQuantity())
-                    .product(productRepository.findProductByProductId(stockDTO.getProductID()))
-                    .build();
 
-            stockRepository.save(stock);
-            return stockMapper.mapStockToStockDTO(stock);
+        if (stockRepository.findStockByProductProductIdAndLocation_Id(stockDTO.getProductID(), stockDTO.getLocationID()).isPresent()) {
+            Optional<Stock> optionalStock = stockRepository.findStockByProductProductIdAndLocation_Id(stockDTO.getProductID(), stockDTO.getLocationID());
+            if (optionalStock.isPresent()) {
+                Stock stock = optionalStock.get();
+                stock.setQuantity(stockDTO.getQuantity() + stock.getQuantity());
+                stockRepository.save(stock);
+                return stockMapper.mapStockToStockDTO(stock);
+            }
         } else {
-            throw new ProductNotFoundException("Product: " + stockDTO.getProductID() + " does't exist");
+            if (productRepository.findProductByProductId(stockDTO.getProductID()) != null) {
+                Stock stock = Stock.builder()
+                        .location(locationRepository.findLocationById(stockDTO.getLocationID()))
+                        .quantity(stockDTO.getQuantity())
+                        .product(productRepository.findProductByProductId(stockDTO.getProductID()))
+                        .build();
+                stockRepository.save(stock);
+                return stockMapper.mapStockToStockDTO(stock);
+            }
         }
+        throw new ProductNotFoundException("Product: " + stockDTO.getProductID() + " does't exist");
     }
 
     public StockDTO updateStock(StockDTO stockDTO) {
@@ -44,5 +56,9 @@ public class StockService {
         } else {
             throw new StockNotFoundException("Stock not found");
         }
+    }
+
+    public List<StockDTO> getAllStocks() {
+        return stockMapper.mapStockListToStockDTOList(stockRepository.findAll());
     }
 }
