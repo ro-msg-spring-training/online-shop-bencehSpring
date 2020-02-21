@@ -15,8 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO implements Serializable {
 
-    private Integer id;
-    private Integer userId;
+    private String userId;
     private LocalDateTime orderTimestamp;
     private AddressDTO deliveryLocation;
     private List<OrderDetailDTO> productsList;

@@ -14,10 +14,9 @@ public class OrderMapper {
 
     public OrderDTO mapOrderToOrderDTO(Order order) {
         return OrderDTO.builder()
-                .id(order.getId())
                 .deliveryLocation(addressMapper.mapAddressToAddressDTO(order.getDeliveryLocation().getAddress()))
                 .orderTimestamp(order.getCreatedAt())
-                .userId(order.getUser().getUserId())
+                .userId(order.getUser().getUsername())
                 .productsList(orderDetailMapper.mapOrderDetailListToOrderDetailDtoList(order.getOrderDetail()))
                 .build();
     }

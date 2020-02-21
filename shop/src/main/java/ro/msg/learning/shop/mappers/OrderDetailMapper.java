@@ -11,11 +11,9 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class OrderDetailMapper {
-
     public OrderDetailDTO mapOrderDetailToOrderDetailDto(OrderDetail orderDetail) {
         return OrderDetailDTO.builder()
-                .id(orderDetail.getId())
-                .productID(orderDetail.getProductId())
+                .productId(orderDetail.getProductId())
                 .quantity(orderDetail.getQuantity())
                 .build();
     }
@@ -26,8 +24,7 @@ public class OrderDetailMapper {
 
     public OrderDetail mapOrderDetailDtoToOrderDetail(OrderDetailDTO orderDetailDto) {
         return OrderDetail.builder()
-                .id(orderDetailDto.getId())
-                .productId(orderDetailDto.getProductID())
+                .productId(orderDetailDto.getProductId())
                 .quantity(orderDetailDto.getQuantity())
                 .build();
     }
