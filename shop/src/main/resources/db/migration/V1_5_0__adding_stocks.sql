@@ -28,3 +28,12 @@ insert into stock (id, quantity, location_id, product_product_id) values (27, 95
 insert into stock (id, quantity, location_id, product_product_id) values (28, 77, 4, 32);
 insert into stock (id, quantity, location_id, product_product_id) values (29, 13, 20, 43);
 insert into stock (id, quantity, location_id, product_product_id) values (30, 95, 5, 18);
+insert into stock (id, quantity, location_id, product_product_id) values (31, 15, 2, 2);
+insert into stock (id, quantity, location_id, product_product_id) values (32, 85, 6, 1);
+insert into stock (id, quantity, location_id, product_product_id) values (33, 51, 7, 4);
+insert into stock (id, quantity, location_id, product_product_id) values (34, 28, 4, 3);
+insert into stock (id, quantity, location_id, product_product_id) values (35, 86, 11, 20);
+insert into stock (id, quantity, location_id, product_product_id) values (36, 26, 10, 16);
+insert into stock (id, quantity, location_id, product_product_id) values (37, 95, 11, 48);
+insert into stock (id, quantity, location_id, product_product_id) values (38, 77, 4, 32);
+insert into stock (id, quantity, location_id, product_product_id) values (39, 13, 20, 43);
