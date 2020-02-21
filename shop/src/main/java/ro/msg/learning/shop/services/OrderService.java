@@ -37,7 +37,6 @@ public class OrderService {
 
     public OrderDTO getOrderById(Integer id) throws OrderNotFoundException {
         Optional<Order> orderOptional = orderRepository.findById(id);
-
         if (orderOptional.isPresent()) {
             return orderMapper.mapOrderToOrderDTO(orderOptional.get());
         } else {
@@ -46,28 +45,25 @@ public class OrderService {
     }
 
     public OrderDTO createOrder(OrderDTO orderDTO) {
-
         List<StockDTO> orderedProducts = deliveryStrategyInterface.doAlgorithm(orderDTO.getProductsList());
-        User user = userService.findUser(orderDTO.getUserId());
+        User user = userService.findUserByUsername(orderDTO.getUserId());
         Order order = Order.builder()
-                .deliveryLocation(this.testLocationExistence("ADRESA LUI ", orderDTO.getDeliveryLocation()))
+                .deliveryLocation(this.testLocationExistence(orderDTO.getDeliveryLocation().getAddressCity(), orderDTO.getDeliveryLocation()))
                 .createdAt(LocalDateTime.now())
                 .user(user)
                 .orderDetail(orderDetailMapper.mapOrderDetailListDtoToOrderDetailList(orderDTO.getProductsList()))
+                .shippedFrom(locationRepository.findLocationById(2))
                 .build();
 
         order.getOrderDetail().forEach(orderDetail -> orderDetail.setOrder(order));
         orderRepository.save(order);
-        orderedProducts.forEach(
-                stockService::updateStock
-        );
+        orderedProducts.forEach(stockService::updateStock);
         return orderMapper.mapOrderToOrderDTO(order);
     }
 
     public Address testAddressExistence(String country, String city, String street) {
         Optional<Address> addressOptional = addressRepository.findByCountryAndAndCityAndStreet(country, city, street);
         Address address = null;
-
         if (addressOptional.isPresent()) {
             address = addressOptional.get();
         } else {
@@ -90,7 +86,8 @@ public class OrderService {
         } else {
             location = new Location();
             location.setName(name);
-            location.setAddress(this.testAddressExistence(addressDTO.getAddressCountry(), addressDTO.getAddressCity(), addressDTO.getAddressStreet()));
+            location.setAddress(
+                    this.testAddressExistence(addressDTO.getAddressCountry(), addressDTO.getAddressCity(), addressDTO.getAddressStreet()));
             locationRepository.save(location);
         }
         return location;

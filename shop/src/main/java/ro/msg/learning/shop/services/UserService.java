@@ -7,6 +7,7 @@ import ro.msg.learning.shop.dtos.UserDTO;
 import ro.msg.learning.shop.entities.Roles;
 import ro.msg.learning.shop.entities.User;
 import ro.msg.learning.shop.exceptions.UserNotFoundException;
+import ro.msg.learning.shop.mappers.CartMapper;
 import ro.msg.learning.shop.mappers.LogInMapper;
 import ro.msg.learning.shop.mappers.UserMapper;
 import ro.msg.learning.shop.repositories.UserRepository;
@@ -23,6 +24,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final RolesService rolesService;
     private final LogInMapper logInMapper;
+    private final CartMapper cartMapper;
 
     public List<UserDTO> findAll() {
         List<UserDTO> userList = new ArrayList<>();
@@ -46,18 +48,10 @@ public class UserService {
                 .lastName(splitName[1])
                 .password(newUser.getPassword())
                 .role(role)
+                .selectedProducts(cartMapper.mapCartDTOListToCartList(newUser.getCart()))
                 .build();
         userRepository.save(user);
         return userMapper.mapUserToUserDTO(user);
-    }
-
-    public UserDTO findById(Integer id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        if (userOptional.isPresent()) {
-            return userMapper.mapUserToUserDTO(userOptional.get());
-        } else {
-            throw new UserNotFoundException(id);
-        }
     }
 
     public void deleteById(Integer id) {
@@ -78,7 +72,6 @@ public class UserService {
             existingUser.setLastName(splitName[1]);
             existingUser.setPassword(userToUpdate.getPassword());
             existingUser.setRole(role);
-
             userRepository.save(existingUser);
             return userMapper.mapUserToUserDTO(existingUser);
         } else {
@@ -92,6 +85,13 @@ public class UserService {
         } else {
             throw new UserNotFoundException(userId);
         }
+    }
+
+    public User findUserByUsername(String username) {
+        if (userRepository.findUserByUsername(username).isPresent())
+            return userRepository.findUserByUsername(username).get();
+        else
+            throw new UserNotFoundException(username);
     }
 
     public LogInDTO validateCredentials(LogInDTO logInDTO) {
@@ -118,5 +118,17 @@ public class UserService {
         } else {
             throw new UserNotFoundException(username);
         }
+    }
+
+    public UserDTO postCart(String username, UserDTO userDTO) {
+        Optional<User> optionalUser = userRepository.findUserByUsername(username);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.setSelectedProducts(cartMapper.mapCartDTOListToCartList(userDTO.getCart()));
+            existingUser.getSelectedProducts().forEach(selectedProduct -> selectedProduct.setUser(existingUser));
+            userRepository.save(existingUser);
+            return userMapper.mapUserToUserDTO(existingUser);
+        }
+        throw new UserNotFoundException(username);
     }
 }

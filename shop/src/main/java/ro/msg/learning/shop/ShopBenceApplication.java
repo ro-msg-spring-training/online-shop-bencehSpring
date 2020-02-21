@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class ShopBenceApplication {
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(ShopBenceApplication.class, args);
 	}
