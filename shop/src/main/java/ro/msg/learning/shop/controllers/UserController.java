@@ -3,6 +3,7 @@ package ro.msg.learning.shop.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import ro.msg.learning.shop.dtos.CartDTO;
 import ro.msg.learning.shop.dtos.UserDTO;
 import ro.msg.learning.shop.services.UserService;
 
@@ -34,11 +35,11 @@ public class UserController {
         return userService.update(id, userToUpdate);
     }
 
-//    @GetMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public UserDTO getUser(@PathVariable Integer id) {
-//        return userService.findById(id);
-//    }
+    @PatchMapping("/{username}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDTO postCart(@PathVariable String username, @RequestBody UserDTO userDTO) {
+        return userService.postCart(username, userDTO);
+    }
 
     @GetMapping("/{username}")
     @ResponseStatus(HttpStatus.OK)

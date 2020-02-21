@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +20,5 @@ public class UserDTO implements Serializable {
     private String fullName;
     private String emailAddress;
     private RoleDTO role;
+    private List<CartDTO> cart;
 }

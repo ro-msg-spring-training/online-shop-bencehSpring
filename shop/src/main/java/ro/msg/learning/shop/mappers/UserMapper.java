@@ -10,6 +10,7 @@ import ro.msg.learning.shop.entities.User;
 public class UserMapper {
 
     private final RoleMapper roleMapper;
+    private final CartMapper cartMapper;
 
     public UserDTO mapUserToUserDTO(User user) {
         return UserDTO.builder()
@@ -18,6 +19,7 @@ public class UserMapper {
                 .password(user.getPassword())
                 .username(user.getUsername())
                 .role(roleMapper.mapRoleToRoleDTO(user.getRole()))
+                .cart(cartMapper.mapCartListToCartDTOList(user.getSelectedProducts()))
                 .build();
     }
 }
