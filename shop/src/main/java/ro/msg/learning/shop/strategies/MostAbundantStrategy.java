@@ -22,7 +22,7 @@ public class MostAbundantStrategy implements DeliveryStrategyInterface {
         List<StockDTO> existingProducts = new ArrayList<>();
 
         for (OrderDetailDTO requestedProducts : requested) {
-            List<Stock> stocksWhichContainsTheProduct = stockRepository.findStockByProductProductId(requestedProducts.getProductID());
+            List<Stock> stocksWhichContainsTheProduct = stockRepository.findStockByProductProductId(requestedProducts.getProductId());
 
             Stock mostAbundant = stocksWhichContainsTheProduct.stream().max(Comparator.comparing(Stock::getQuantity)).get();
 
@@ -30,7 +30,7 @@ public class MostAbundantStrategy implements DeliveryStrategyInterface {
                 existingProducts.add(StockDTO.builder()
                         .quantity(requestedProducts.getQuantity())
                         .locationID(mostAbundant.getLocation().getId())
-                        .productID(requestedProducts.getProductID())
+                        .productID(requestedProducts.getProductId())
                         .build()
                 );
             if (existingProducts.size() == requested.size())

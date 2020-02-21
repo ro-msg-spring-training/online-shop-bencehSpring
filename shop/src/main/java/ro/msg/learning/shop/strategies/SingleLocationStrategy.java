@@ -32,10 +32,10 @@ public class SingleLocationStrategy implements DeliveryStrategyInterface {
 
             for (Stock currentStock : locationStock) {
                 for (OrderDetailDTO requestedStock : requested) {
-                    if (currentStock.getProduct().getProductId().equals(requestedStock.getProductID()) && requestedStock.getQuantity() < currentStock.getQuantity()) {
+                    if (currentStock.getProduct().getProductId().equals(requestedStock.getProductId()) && requestedStock.getQuantity() < currentStock.getQuantity()) {
                         stockList.add(
                                 StockDTO.builder()
-                                        .productID(requestedStock.getProductID())
+                                        .productID(requestedStock.getProductId())
                                         .locationID(location.getId())
                                         .quantity(requestedStock.getQuantity())
                                         .build()
