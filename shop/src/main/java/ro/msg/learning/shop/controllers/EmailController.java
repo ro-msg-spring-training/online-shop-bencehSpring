@@ -16,7 +16,7 @@ public class EmailController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
-    public void sendEmail(@RequestBody EmailDTO productId) {
-        emailService.sendEmail(productId);
+    public void sendEmail(@RequestBody EmailDTO emailDTO) {
+        emailService.sendEmail(emailDTO);
     }
 }
