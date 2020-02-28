@@ -30,6 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Cart> selectedProducts;
 }
