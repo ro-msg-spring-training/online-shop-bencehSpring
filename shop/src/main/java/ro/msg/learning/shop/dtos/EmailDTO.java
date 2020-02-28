@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class EmailDTO {
     private Integer productId;
+    private String username;
 }

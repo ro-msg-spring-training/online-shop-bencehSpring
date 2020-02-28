@@ -18,6 +18,7 @@ public class UserMapper {
                 .fullName(user.getFistName() + " " + user.getLastName())
                 .password(user.getPassword())
                 .username(user.getUsername())
+                .emailAddress(user.getEmailAddress())
                 .role(roleMapper.mapRoleToRoleDTO(user.getRole()))
                 .cart(cartMapper.mapCartListToCartDTOList(user.getSelectedProducts()))
                 .build();
