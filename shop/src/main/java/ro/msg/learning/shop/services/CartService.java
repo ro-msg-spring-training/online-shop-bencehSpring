@@ -18,7 +18,7 @@ public class CartService {
     }
 
     @Transactional
-    public void deleteByUser(String username){
+    public void deleteByUser(String username) {
         cartRepository.deleteCartByUser_Username(username);
     }
 }

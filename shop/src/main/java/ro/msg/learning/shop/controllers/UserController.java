@@ -3,7 +3,6 @@ package ro.msg.learning.shop.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ro.msg.learning.shop.dtos.CartDTO;
 import ro.msg.learning.shop.dtos.UserDTO;
 import ro.msg.learning.shop.services.UserService;
 

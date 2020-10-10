@@ -7,6 +7,7 @@ import ro.msg.learning.shop.dtos.UserDTO;
 import ro.msg.learning.shop.entities.Roles;
 import ro.msg.learning.shop.entities.User;
 import ro.msg.learning.shop.exceptions.UserNotFoundException;
+import ro.msg.learning.shop.exceptions.UsernameAlreadyUsedException;
 import ro.msg.learning.shop.mappers.CartMapper;
 import ro.msg.learning.shop.mappers.LogInMapper;
 import ro.msg.learning.shop.mappers.UserMapper;
@@ -39,19 +40,22 @@ public class UserService {
     }
 
     public UserDTO save(UserDTO newUser) {
-        String[] splitName = splitNames(newUser.getFullName());
-        Roles role = rolesService.getRoleByName(newUser.getRole().getRoleName());
-        User user = User.builder()
-                .emailAddress(newUser.getEmailAddress())
-                .username(newUser.getUsername())
-                .fistName(splitName[0])
-                .lastName(splitName[1])
-                .password(newUser.getPassword())
-                .role(role)
-                .selectedProducts(cartMapper.mapCartDTOListToCartList(newUser.getCart()))
-                .build();
-        userRepository.save(user);
-        return userMapper.mapUserToUserDTO(user);
+        if (!userRepository.findUserByUsername(newUser.getUsername()).isPresent()) {
+            String[] splitName = splitNames(newUser.getFullName());
+            Roles role = rolesService.getRoleByName(newUser.getRole().getRoleName());
+            User user = User.builder()
+                    .emailAddress(newUser.getEmailAddress())
+                    .username(newUser.getUsername())
+                    .fistName(splitName[0])
+                    .lastName(splitName[1])
+                    .password(newUser.getPassword())
+                    .role(role)
+                    .selectedProducts(cartMapper.mapCartDTOListToCartList(newUser.getCart()))
+                    .build();
+            userRepository.save(user);
+            return userMapper.mapUserToUserDTO(user);
+        }
+        throw new UsernameAlreadyUsedException("Username " + newUser.getUsername() + " is already used");
     }
 
     public void deleteById(Integer id) {
